@@ -1,4 +1,4 @@
-import { DragoInfo } from "../types/DragoInfoType";
+import { DragoInfo } from "../../types/drago";
 
 export const countDragosOwned = (dragos: DragoInfo[]): number => {
   return dragos.length;
@@ -23,4 +23,25 @@ export const countTotalDSA = (dragos: DragoInfo[]): number => {
     (total, drago) => total + (Number(drago.rent?.stats?.totalProfit) || 0),
     0
   );
+};
+
+// Activity Data
+
+export const getDragosOnNearExpiryDate = (dragos: DragoInfo[]): DragoInfo[] => {
+  const expiryDate = new Date().toISOString();
+  const nearExpiryDate = new Date(expiryDate).setDate(
+    new Date(expiryDate).getDate() + 29
+  );
+  const dragosOnNearExpiryDate = dragos
+    .filter((drago) => drago.rent.status === 1)
+    .filter(
+      (drago) => new Date(drago.rent.expireDate) < new Date(nearExpiryDate)
+    )
+    .sort(
+      (a, b) =>
+        new Date(a.rent.expireDate).getTime() -
+        new Date(b.rent.expireDate).getTime()
+    );
+
+  return dragosOnNearExpiryDate;
 };

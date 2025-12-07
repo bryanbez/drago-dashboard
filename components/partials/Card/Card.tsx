@@ -1,4 +1,4 @@
-import { CardProps } from "./CardType";
+import { CardProps } from "@/app/types/components";
 
 const Card: React.FC<CardProps> = ({ value, label, icon, isDollarSign }) => {
   return (

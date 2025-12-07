@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
-import { DragoInfo } from "../lib/types/DragoInfoType";
+import { DragoInfo } from "../types/drago";
 
 type DragosContextType = {
   dragos: DragoInfo[];

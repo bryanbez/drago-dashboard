@@ -1,5 +1,6 @@
 "use client";
 
+import { DST_TO_USD_RATE } from "@/app/lib/constants";
 import Card from "../partials/Card/Card";
 import { useDragosDashboardCard } from "@/app/hooks/useDragosDashboardCard";
 import {
@@ -52,7 +53,7 @@ export default function DashboardCards() {
         />
 
         <Card
-          value={(countUnclaimedDSTValue() * 0.0004715).toFixed(2)}
+          value={(countUnclaimedDSTValue() * DST_TO_USD_RATE).toFixed(2)}
           label="Estimate $ of Unclaimed DST"
           icon={<TotalDSAIcon />}
           isDollarSign={true}

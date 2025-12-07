@@ -1,5 +1,5 @@
 import { useWalletAddressInputValue } from "@/app/context/useTextBoxInput";
-import type { TextboxType } from "./TextboxType";
+import type { TextboxType } from "@/app/types/components";
 
 function TextboxInput({ placeholder, value, type }: TextboxType) {
   const { setWalletAddress } = useWalletAddressInputValue();

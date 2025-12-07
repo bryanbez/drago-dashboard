@@ -6,7 +6,7 @@ import {
   countUnrentedDragos,
   countRentedDragos,
 } from "../lib/utils/dragoDashboard";
-import { DragoInfo } from "../lib/types/DragoInfoType";
+import { DragoInfo } from "../types/drago";
 
 export const useDragosDashboardCard = () => {
   const { dragos } = useDragosValue();

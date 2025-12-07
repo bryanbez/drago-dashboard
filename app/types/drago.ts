@@ -31,21 +31,16 @@ export interface DragoParents {
   1: number;
 }
 
-// export interface DragoApiCache<T> {
-//   etag?: string;
-//   data: T; // T is use in generic placeholder in Typescript
-// } for local cache saved
-
 export interface DragoInfo {
-  _id: number; // because json data has _id attribute
-  lair: DragoLair; // this returns an object only
-  rent: DragoRent; // this returns an object only
+  _id: number;
+  lair: DragoLair;
+  rent: DragoRent;
   network: number;
   status: number;
   breed: number;
   fusion: number;
   block: number;
-  parents: DragoParents; // this returns an object only
+  parents: DragoParents;
   level: number;
   xp: number;
   tokenId: number;

@@ -3,7 +3,7 @@ import { useWalletAddressInputValue } from "../context/useTextBoxInput";
 
 import { useDragosValue } from "../context/dragos";
 import { getDragos } from "../lib/apiCall";
-import { DragoInfo } from "../lib/types/DragoInfoType";
+import { DragoInfo } from "../types/drago";
 import useSWR from "swr";
 
 const fetcher = (walletAddress: string) =>
