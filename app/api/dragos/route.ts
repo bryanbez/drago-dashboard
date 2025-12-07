@@ -15,13 +15,32 @@ export async function POST(request: Request) {
         address,
         includeRent,
       }),
+
       //0xE86Cd3C133cC32D75d793FA8834A2BaC14d4aD3b
     });
 
+    if (!response.ok) {
+      let errorDetails;
+      try {
+        errorDetails = await response.json();
+      } catch {
+        errorDetails = await response.text();
+      }
+      return NextResponse.json(
+        {
+          message: `Failed to fetch data: ${response.status} ${response.statusText}`,
+          details: errorDetails,
+        },
+        { status: response.status }
+      );
+    }
+
     const data = await response.json();
 
-    return NextResponse.json({ message: data.myDragos }, { status: 201 });
+    return NextResponse.json({ dragos: data.myDragos }, { status: 201 });
   } catch (err) {
-    return NextResponse.json({ message: err }, { status: 404 });
+    const errorMessage =
+      err instanceof Error ? err.message : "Unknown error occured";
+    return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }

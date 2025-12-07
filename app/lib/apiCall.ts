@@ -13,8 +13,16 @@ export async function getDragos(walletAddress: string) {
     });
 
     const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.log("An Error Occured: ", err);
+
+    if (!res.ok) {
+      throw new Error(data.message || "Something went wrong");
+    }
+
+    return data;
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error("Failed to fetch");
   }
 }

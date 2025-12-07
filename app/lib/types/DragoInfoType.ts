@@ -17,7 +17,7 @@ export interface DragoRentStats {
 }
 
 export interface DragoRent {
-  status: string;
+  status: number;
   expireDate: Date;
   from: string;
   profitShareRatio: number;

@@ -15,7 +15,24 @@ export const WalletAddressInputProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [walletAddress, setWalletAddressState] = useState<string>("");
+
+  // Initialize from localStorage on mount
+  useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("drago_wallet_address");
+      if (stored) {
+        setWalletAddressState(stored);
+      }
+    }
+  });
+
+  const setWalletAddress = (v: string) => {
+    setWalletAddressState(v);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("drago_wallet_address", v);
+    }
+  };
 
   return (
     <WalletAddressInputContext.Provider
