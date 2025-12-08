@@ -1,5 +1,7 @@
 import { DragoInfo } from "../../types/drago";
 
+// Dashboard Data
+
 export const countDragosOwned = (dragos: DragoInfo[]): number => {
   return dragos.length;
 };

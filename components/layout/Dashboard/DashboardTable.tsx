@@ -1,7 +1,7 @@
 "use client";
 
 import type { DragoInfo } from "@/app/types/drago";
-import { DragosNearRentExpiryTable } from "../partials/Table/dragosNearRentExpiryTable";
+import { DragosNearRentExpiryTable } from "../../partials/Table/dragosNearRentExpiryTable";
 import { useDragosValue } from "@/app/context/dragos";
 
 export function DashboardTable() {

@@ -1,6 +1,6 @@
 "use client";
 
-import ShowProfitShareRatioGraph from "../partials/Graphs/ProfitShareRatio";
+import ShowProfitShareRatioGraph from "../../partials/Graphs/ProfitShareRatio";
 import type { DragoInfo } from "@/app/types/drago";
 import { getCountOfDragosInEveryShareRatio } from "@/app/lib/utils/dragoGraphData";
 import { useDragosValue } from "@/app/context/dragos";

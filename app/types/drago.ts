@@ -31,6 +31,19 @@ export interface DragoParents {
   1: number;
 }
 
+export interface DragoFilter {
+  genesis: boolean;
+  heart: number;
+  parts: {
+    aqua: number;
+    dark: number;
+    fire: number;
+    legendary: number;
+    light: number;
+    terra: number;
+  };
+}
+
 export interface DragoInfo {
   _id: number;
   lair: DragoLair;
@@ -48,4 +61,5 @@ export interface DragoInfo {
   grade: number;
   dragoImageURL: string;
   stats: DragoRentStats;
+  filter: DragoFilter;
 }

@@ -1,7 +1,7 @@
 import DashboardCards from "@/components/sections/DashboardCards";
-import DashboardLayout from "@/components/layout/DashboardLayout";
-import { DashboardGraph } from "@/components/layout/DashboardGraph";
-import { DashboardTable } from "@/components/layout/DashboardTable";
+import DashboardLayout from "@/components/layout/Dashboard/DashboardLayout";
+import { DashboardGraph } from "@/components/layout/Dashboard/DashboardGraph";
+import { DashboardTable } from "@/components/layout/Dashboard/DashboardTable";
 
 export default function Home() {
   return (

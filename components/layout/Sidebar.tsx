@@ -5,7 +5,7 @@ import React from "react";
 import {
   DashboardIcon,
   DragosIconSidebar,
-  AnalyticsIconSidebar,
+  RenteesIconSidebar,
   SettingIconSidebar,
 } from "../partials/svg";
 
@@ -22,9 +22,9 @@ const Sidebar = () => {
       label: "Dragos",
     },
     {
-      href: "/analytics",
-      icon: <AnalyticsIconSidebar />,
-      label: "Analytics",
+      href: "/rentees",
+      icon: <RenteesIconSidebar />,
+      label: "Rentees",
     },
     {
       href: "/settings",

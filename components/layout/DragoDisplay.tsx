@@ -10,8 +10,6 @@ import {
   isUnrented,
 } from "@/app/lib/utils/dragoDisplay";
 import { DragoInfo } from "@/app/types/drago";
-import { getCountOfDragosInEveryShareRatio } from "@/app/lib/utils/dragoGraphData";
-
 import { ChevronLeftIcon, ChevronRightIcon } from "../partials/svg";
 
 export const DragoDisplay = () => {
@@ -25,10 +23,6 @@ export const DragoDisplay = () => {
   ] = useState(false);
   const [hideRentedDragosValue, setHideRentedDragosValue] = useState(false);
   const [hideUnrentedDragosValue, setHideUnrentedDragosValue] = useState(false);
-
-  // do filter here
-
-  console.log(getCountOfDragosInEveryShareRatio(dragos));
 
   const displayDragos: DragoInfo[] = dragos.filter(
     (drago) =>
