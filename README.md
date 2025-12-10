@@ -19,3 +19,7 @@ Dragos Dashboard is a web application that allows users to view their Dragos NFT
 # Using
 
 Google Antigravity and its A.I. Features
+
+## Minor Issues
+
+- Double fetching of data

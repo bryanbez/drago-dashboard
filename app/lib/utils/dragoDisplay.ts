@@ -28,13 +28,13 @@ export const displayPagination = (pageCount: number) => {
 };
 
 export const hasUnclaimedDST = (drago: DragoInfo) => {
-  return drago.rent.stats.unclaimedProfit > 0;
+  return drago.rent?.stats?.unclaimedProfit > 0;
 };
 
 export const isUnrented = (drago: DragoInfo) => {
-  return drago.rent.status === 0;
+  return drago.rent?.status === 0;
 };
 
 export const isRented = (drago: DragoInfo) => {
-  return drago.rent.status === 1;
+  return drago.rent?.status === 1;
 };

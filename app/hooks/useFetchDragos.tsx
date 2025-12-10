@@ -1,13 +1,14 @@
 "use client";
 import { useWalletAddressInputValue } from "../context/useTextBoxInput";
-
 import { useDragosValue } from "../context/dragos";
-import { getDragos } from "../lib/apiCall";
+import { getDragosService } from "../lib/service/dragoService";
 import { DragoInfo } from "../types/drago";
 import useSWR from "swr";
 
 const fetcher = (walletAddress: string) =>
-  getDragos(walletAddress).then((res) => res.dragos);
+  getDragosService(walletAddress, true).then(
+    (res) => (res as { dragos: DragoInfo[] }).dragos
+  );
 
 export const useFetchDragos = () => {
   const { walletAddress } = useWalletAddressInputValue();
@@ -29,7 +30,7 @@ export const useFetchDragos = () => {
   return {
     fetchDragos: mutate,
     status: isLoading ? "loading" : error ? "error" : "success",
-    message: error ? error.message : "",
+    message: error ? error.message : "Fetched from API",
     dragos: data as DragoInfo[],
   };
 };

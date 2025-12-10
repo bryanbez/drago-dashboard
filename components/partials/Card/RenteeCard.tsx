@@ -1,12 +1,9 @@
-import type { RenteeInfoStats } from "@/app/types/rentee";
+import { RenteeCardProps } from "@/app/types/components";
 import { RenteeIcon } from "../svg";
 import { useRenteeInfoStore } from "@/app/lib/stores/storeRenteInfo";
 import { formatAddress, formatDST } from "@/app/lib/utils/renteeInfo";
 import Link from "next/link";
-
-interface RenteeCardProps {
-  data: RenteeInfoStats;
-}
+import { StatsBreakdown } from "@/components/partials/Stats/StatsBreakdown";
 
 export const RenteeCard = ({ data }: RenteeCardProps) => {
   const setRenteeInfo = useRenteeInfoStore((s) => s.setRenteeInfo);
@@ -37,42 +34,14 @@ export const RenteeCard = ({ data }: RenteeCardProps) => {
           <p className="text-green-600 text-xs uppercase tracking-wider mb-1">
             Unclaimed DST
           </p>
-          <p className="text-2xl font-bold text-green-700">
+          <p className="text-lg font-bold text-green-700">
             {formatDST(data.totalUnclaimedProfit)}
           </p>
         </div>
       </div>
 
       {/* Breakdown */}
-      <div className="space-y-3 border-t border-gray-100 pt-4">
-        {/* Legendary Row */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-            <span className="text-sm text-gray-600 font-medium">Legendary</span>
-            <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-md">
-              x{data.totalOfLegDragos}
-            </span>
-          </div>
-          <span className="text-sm font-semibold text-gray-700">
-            {formatDST(data.totalProfitOfLegDragos)} DST
-          </span>
-        </div>
-
-        {/* Normal Row */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-gray-400"></span>
-            <span className="text-sm text-gray-600 font-medium">Normal</span>
-            <span className="text-xs text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-md">
-              x{data.totalOfNormalDragos}
-            </span>
-          </div>
-          <span className="text-sm font-semibold text-gray-700">
-            {formatDST(data.totalProfitOfNormalDragos)} DST
-          </span>
-        </div>
-      </div>
+      <StatsBreakdown data={data} />
 
       <div className="flex items-center justify-between mt-4">
         <Link

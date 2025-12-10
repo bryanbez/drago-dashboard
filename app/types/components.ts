@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import type { RenteeInfoStats } from "./rentee";
 
 export interface CardProps {
   value: string | number;
@@ -17,4 +18,17 @@ export interface TextboxType {
 
 export interface DragoCardProps {
   drago: import("./drago").DragoInfo;
+}
+
+export interface RenteeCardProps {
+  data: RenteeInfoStats;
+}
+
+export interface StatsGridProps {
+  count: number;
+  totalUnclaimedProfit: number;
+}
+
+export interface StatsBreakdownProps {
+  data: RenteeInfoStats;
 }

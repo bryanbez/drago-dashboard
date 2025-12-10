@@ -14,7 +14,7 @@ export const RenteeList = () => {
   );
   const renteeInfoStatsValue = renteeInfoStats(renteeDragosRentedInfoValue);
   return (
-    <div className="grid grid-cols sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
       {renteeInfoStatsValue.map((renteeInfoStat) => (
         <RenteeCard
           key={renteeInfoStat.walletAddress}

@@ -5,6 +5,13 @@ export async function POST(request: Request) {
   const LOK_EXTERNAL_LINK_DRAGO =
     process.env.NEXT_PUBLIC_EXTERNAL_API_LINK_WALLET_ADDRESS_DRAGO;
 
+  if (!LOK_EXTERNAL_LINK_DRAGO) {
+    return NextResponse.json(
+      { message: "External API Not Found" },
+      { status: 500 }
+    );
+  }
+
   try {
     const response = await fetch(`${LOK_EXTERNAL_LINK_DRAGO}`, {
       method: "POST",

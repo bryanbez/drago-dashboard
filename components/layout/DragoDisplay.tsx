@@ -11,6 +11,7 @@ import {
 } from "@/app/lib/utils/dragoDisplay";
 import { DragoInfo } from "@/app/types/drago";
 import { ChevronLeftIcon, ChevronRightIcon } from "../partials/svg";
+import { countUnclaimedDST } from "@/app/lib/utils/dragoDashboard";
 
 export const DragoDisplay = () => {
   const { dragos } = useDragosValue();
@@ -31,6 +32,14 @@ export const DragoDisplay = () => {
       (!hideUnrentedDragosValue || isRented(drago))
   );
 
+  const unclaimedDSTCount = countUnclaimedDST(displayDragos);
+  const checkDragoWithZeroUnclaimedDSTValue = displayDragos.some(
+    (drago) => drago.rent.stats.unclaimedProfit === 0
+  );
+  const checkDragoWithUnrentedValue = displayDragos.some(
+    (drago) => drago.rent.status === 0
+  );
+
   // then pagination on final filtered array
 
   const pageCount = getDragosDisplayByPageCount(displayDragos, pageSize);
@@ -39,6 +48,8 @@ export const DragoDisplay = () => {
     page,
     pageSize
   );
+
+  console.log(checkDragoWithUnrentedValue);
 
   return (
     <>
@@ -92,33 +103,37 @@ export const DragoDisplay = () => {
 
           <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
             <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600">
-              <label className="flex items-center gap-2 cursor-pointer hover:text-gray-900 transition-colors">
-                <input
-                  type="checkbox"
-                  checked={hideDragosWithZeroUnclaimedDSTValue}
-                  onChange={() =>
-                    setHideDragosWithZeroUnclaimedDSTValue(
-                      !hideDragosWithZeroUnclaimedDSTValue
-                    )
-                  }
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
-                />
-                <span>Hide zero unclaimed DST</span>
-              </label>
+              {unclaimedDSTCount > 0 && (
+                <label className="flex items-center gap-2 cursor-pointer hover:text-gray-900 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={hideDragosWithZeroUnclaimedDSTValue}
+                    onChange={() =>
+                      setHideDragosWithZeroUnclaimedDSTValue(
+                        !hideDragosWithZeroUnclaimedDSTValue
+                      )
+                    }
+                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                  />
+                  <span>Hide zero unclaimed DST</span>
+                </label>
+              )}
 
-              <label className="flex items-center gap-2 cursor-pointer hover:text-gray-900 transition-colors">
-                <input
-                  type="checkbox"
-                  checked={hideRentedDragosValue}
-                  onChange={() => {
-                    const newValue = !hideRentedDragosValue;
-                    setHideRentedDragosValue(newValue);
-                    if (newValue) setHideUnrentedDragosValue(false);
-                  }}
-                  className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
-                />
-                <span>Hide rented</span>
-              </label>
+              {checkDragoWithUnrentedValue && (
+                <label className="flex items-center gap-2 cursor-pointer hover:text-gray-900 transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={hideRentedDragosValue}
+                    onChange={() => {
+                      const newValue = !hideRentedDragosValue;
+                      setHideRentedDragosValue(newValue);
+                      if (newValue) setHideUnrentedDragosValue(false);
+                    }}
+                    className="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                  />
+                  <span>Hide rented</span>
+                </label>
+              )}
 
               <label className="flex items-center gap-2 cursor-pointer hover:text-gray-900 transition-colors">
                 <input

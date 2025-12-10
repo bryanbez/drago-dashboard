@@ -1,15 +1,18 @@
-import Sidebar from "../Sidebar";
-import Header from "../Header";
-import { ReactNode } from "react";
+"use client";
+import DashboardCards from "@/components/sections/DashboardCards";
+import { DashboardGraph } from "./DashboardGraph";
+import { DashboardTable } from "./DashboardTable";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout() {
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex-1 flex flex-col md:ml-64 transition-all duration-300">
-        <Header />
-        <main className="flex-1 p-6 overflow-y-auto">{children}</main>
+    <>
+      <DashboardCards />
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <DashboardGraph />
+        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 min-h-[400px]">
+          <DashboardTable />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
