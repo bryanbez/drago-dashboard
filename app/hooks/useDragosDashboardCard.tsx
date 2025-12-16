@@ -1,4 +1,4 @@
-import { useDragosValue } from "../context/dragos";
+import { useFetchDragos } from "./useFetchDragos";
 import {
   countDragosOwned,
   countUnclaimedDST,
@@ -9,7 +9,7 @@ import {
 import { DragoInfo } from "../types/drago";
 
 export const useDragosDashboardCard = () => {
-  const { dragos } = useDragosValue();
+  const { dragos } = useFetchDragos();
 
   const countDragosOwnedValue = (): number => {
     return countDragosOwned(dragos as DragoInfo[]);

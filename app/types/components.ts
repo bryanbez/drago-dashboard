@@ -12,7 +12,7 @@ export interface TextboxType {
   placeholder: string;
   value?: string;
   type: string;
-  onChangeText?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }
 

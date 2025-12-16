@@ -1,21 +1,18 @@
 "use client";
 
-import { useFetchDragos } from "@/app/hooks/useFetchDragos";
 import Loading from "@/components/partials/Loading";
 import NoDragoFound from "@/components/partials/NoDragoFound";
-import { ReactNode } from "react";
 import Sidebar from "@/components/layout/Sidebar";
 import Header from "@/components/layout/Header";
-import { useWalletAddressInputValue } from "@/app/context/useTextBoxInput";
+import { ReactNode } from "react";
+import { useFetchDragos } from "@/app/hooks/useFetchDragos";
+import { useWalletStore } from "@/app/lib/stores/storeWallet";
 import { usePathname } from "next/navigation";
 
 export default function GlobalDataGuard({ children }: { children: ReactNode }) {
   const { status, dragos } = useFetchDragos();
-  const { walletAddress } = useWalletAddressInputValue();
+  const walletAddress = useWalletStore((state) => state.walletAddress);
   const pathname = usePathname();
-
-  console.log(pathname);
-
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />

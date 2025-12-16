@@ -1,21 +1,20 @@
 "use client";
 import { storeLocalAndSync } from "../lib/service/storeLocalAndSync";
-import { DragoInfo } from "../types/drago";
 import useSWR from "swr";
 
-const fetcher = () => storeLocalAndSync().then((res) => res.dragos);
+const fetcher = () => storeLocalAndSync().then((res) => res.dstPrice);
 
-export const useFetchDragos = () => {
-  const { data, error, isLoading, mutate } = useSWR("dragos", fetcher, {
+export const useFetchDSTPrice = () => {
+  const { data, error, isLoading, mutate } = useSWR("dstPrice", fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     revalidateIfStale: false,
   });
 
   return {
-    fetchDragos: mutate,
+    fetchDSTPrice: mutate,
     status: isLoading ? "loading" : error ? "error" : "success",
     message: error ? error.message : "Fetched from API",
-    dragos: (data as DragoInfo[]) || [],
+    dstPrice: (data as number) || 0,
   };
 };

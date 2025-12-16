@@ -1,13 +1,13 @@
 "use client";
 
 import type { DragoInfo } from "@/app/types/drago";
-import { DragosNearRentExpiryTable } from "../../partials/Table/dragosNearRentExpiryTable";
-import { useDragosValue } from "@/app/context/dragos";
+import { DragosNearRentExpiry } from "../../partials/Table/dragosNearRentExpiryTable";
+import { useFetchDragos } from "@/app/hooks/useFetchDragos";
 export function DashboardTable() {
-  const { dragos } = useDragosValue();
+  const { dragos } = useFetchDragos();
   return (
     <div className="w-full relative">
-      <DragosNearRentExpiryTable dragos={dragos as DragoInfo[]} />
+      <DragosNearRentExpiry dragos={dragos as DragoInfo[]} />
     </div>
   );
 }

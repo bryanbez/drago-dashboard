@@ -1,6 +1,6 @@
 "use client";
 import DashboardCards from "@/components/sections/DashboardCards";
-import { DashboardGraph } from "./DashboardGraph";
+import { RentShareGraph } from "./RentShareGraph";
 import { DashboardTable } from "./DashboardTable";
 
 export default function DashboardLayout() {
@@ -8,7 +8,7 @@ export default function DashboardLayout() {
     <>
       <DashboardCards />
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <DashboardGraph />
+        <RentShareGraph />
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 min-h-[400px]">
           <DashboardTable />
         </div>

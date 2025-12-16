@@ -3,9 +3,9 @@
 import ShowProfitShareRatioGraph from "../../partials/Graphs/ProfitShareRatio";
 import type { DragoInfo } from "@/app/types/drago";
 import { getCountOfDragosInEveryShareRatio } from "@/app/lib/utils/dragoGraphData";
-import { useDragosValue } from "@/app/context/dragos";
-export function DashboardGraph() {
-  const { dragos } = useDragosValue();
+import { useFetchDragos } from "@/app/hooks/useFetchDragos";
+export function RentShareGraph() {
+  const { dragos } = useFetchDragos();
   return (
     <div className="relative w-full h-full">
       <ShowProfitShareRatioGraph

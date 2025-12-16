@@ -1,5 +1,5 @@
 "use client";
-import { useDragosValue } from "@/app/context/dragos";
+import { useFetchDragos } from "@/app/hooks/useFetchDragos";
 import DragoCard from "../partials/Card/DragoCard";
 import { useState } from "react";
 import {
@@ -14,7 +14,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "../partials/svg";
 import { countUnclaimedDST } from "@/app/lib/utils/dragoDashboard";
 
 export const DragoDisplay = () => {
-  const { dragos } = useDragosValue();
+  const { dragos } = useFetchDragos();
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
@@ -33,9 +33,7 @@ export const DragoDisplay = () => {
   );
 
   const unclaimedDSTCount = countUnclaimedDST(displayDragos);
-  const checkDragoWithZeroUnclaimedDSTValue = displayDragos.some(
-    (drago) => drago.rent.stats.unclaimedProfit === 0
-  );
+
   const checkDragoWithUnrentedValue = displayDragos.some(
     (drago) => drago.rent.status === 0
   );
@@ -48,8 +46,6 @@ export const DragoDisplay = () => {
     page,
     pageSize
   );
-
-  console.log(checkDragoWithUnrentedValue);
 
   return (
     <>
@@ -67,9 +63,9 @@ export const DragoDisplay = () => {
                   <button
                     key={size}
                     onClick={() => setPageSize(size)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
+                    className={`px-3 py-1 rounded-md cursor-pointer text-xs font-medium transition-all ${
                       pageSize === size
-                        ? "bg-white text-indigo-600 shadow-sm"
+                        ? "bg-white text-indigo-600 shadow-sm "
                         : "text-gray-500 hover:text-gray-900"
                     }`}>
                     {size}

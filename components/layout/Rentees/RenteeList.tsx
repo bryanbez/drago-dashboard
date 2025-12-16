@@ -1,6 +1,6 @@
 "use client";
 
-import { useDragosValue } from "@/app/context/dragos";
+import { useFetchDragos } from "@/app/hooks/useFetchDragos";
 import type { RenteeInfoStats } from "@/app/types/rentee";
 import { RenteeCard } from "@/components/partials/Card/RenteeCard";
 import { DragoInfo } from "@/app/types/drago";
@@ -8,7 +8,7 @@ import { renteeDragosRentedInfo } from "@/app/lib/utils/renteeInfo";
 import { renteeInfoStats } from "@/app/lib/utils/renteeInfo";
 
 export const RenteeList = () => {
-  const { dragos } = useDragosValue();
+  const { dragos } = useFetchDragos();
   const renteeDragosRentedInfoValue = renteeDragosRentedInfo(
     dragos as DragoInfo[]
   );

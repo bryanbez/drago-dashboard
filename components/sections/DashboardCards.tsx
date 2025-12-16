@@ -1,6 +1,5 @@
 "use client";
 
-import { DST_TO_USD_RATE } from "@/app/lib/constants";
 import Card from "../partials/Card/Card";
 import { useDragosDashboardCard } from "@/app/hooks/useDragosDashboardCard";
 import {
@@ -10,6 +9,7 @@ import {
   UnrentedDragosIcon,
   RentedDragosIcon,
 } from "../partials/svg";
+import { useFetchDSTPrice } from "@/app/hooks/useFetchDSTPrice";
 
 export default function DashboardCards() {
   const {
@@ -19,6 +19,8 @@ export default function DashboardCards() {
     countUnrentedDragosValue,
     countRentedDragosValue,
   } = useDragosDashboardCard();
+
+  const { dstPrice } = useFetchDSTPrice();
 
   return (
     <div>
@@ -40,20 +42,19 @@ export default function DashboardCards() {
           label="Unrented Dragos"
           icon={<UnrentedDragosIcon />}
         />
-
         <Card
-          value={countTotalDSAValue()}
+          value={countTotalDSAValue().toLocaleString()}
           label="Total DSA"
           icon={<TotalDSAIcon />}
         />
         <Card
-          value={countUnclaimedDSTValue()}
+          value={countUnclaimedDSTValue().toLocaleString()}
           label="Unclaimed DST"
           icon={<UnclaimedDSTIcon />}
         />
 
         <Card
-          value={(countUnclaimedDSTValue() * DST_TO_USD_RATE).toFixed(2)}
+          value={(countUnclaimedDSTValue() * dstPrice).toFixed(2)}
           label="Estimate $ of Unclaimed DST"
           icon={<TotalDSAIcon />}
           isDollarSign={true}

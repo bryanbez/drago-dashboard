@@ -24,62 +24,57 @@ export function renteeDragosRentedInfo(dragos: DragoInfo[]) {
   return renteesInfo;
 }
 
-export function renteeInfoStats(renteesInfo: RenteeInfo[]) {
-  const renteesInfoStats: RenteeInfoStats[] = [];
-  renteesInfo.forEach((renteeInfo) => {
-    const renteeInfoStat = renteesInfoStats.find(
-      (info) => info.walletAddress === renteeInfo.walletAddress
-    );
-    if (renteeInfoStat) {
-      renteeInfoStat.count = renteeInfo.count;
-      renteeInfoStat.dragos = renteeInfo.dragos;
-      renteeInfoStat.totalUnclaimedProfit = renteeInfo.dragos.reduce(
-        (total, drago) => total + drago.rent?.stats?.unclaimedProfit,
-        0
-      );
-      renteeInfoStat.totalOfLegDragos = renteeInfo.dragos.filter(
-        (drago) => drago.filter?.parts?.legendary == 1
-      ).length;
-      renteeInfoStat.totalOfNormalDragos = renteeInfo.dragos.filter(
-        (drago) => drago.filter?.parts?.legendary == 0
-      ).length;
-      renteeInfoStat.totalProfitOfLegDragos = renteeInfo.dragos
-        .filter((drago) => drago.filter?.parts?.legendary == 1)
-        .reduce((total, drago) => total + drago.rent.stats.unclaimedProfit, 0);
-      renteeInfoStat.totalProfitOfNormalDragos = renteeInfo.dragos
-        .filter((drago) => drago.filter?.parts?.legendary == 0)
-        .reduce((total, drago) => total + drago.rent.stats.unclaimedProfit, 0);
-    } else {
-      renteesInfoStats.push({
-        walletAddress: renteeInfo.walletAddress,
-        count: renteeInfo.count,
-        dragos: renteeInfo.dragos,
-        totalUnclaimedProfit: renteeInfo.dragos.reduce(
-          (total, drago) => total + drago.rent.stats.unclaimedProfit,
-          0
-        ),
-        totalOfLegDragos: renteeInfo.dragos.filter(
-          (drago) => drago.filter?.parts?.legendary == 1
-        ).length,
-        totalOfNormalDragos: renteeInfo.dragos.filter(
-          (drago) => drago.filter?.parts?.legendary == 0
-        ).length,
-        totalProfitOfLegDragos: renteeInfo.dragos
-          .filter((drago) => drago.filter?.parts?.legendary == 1)
-          .reduce(
-            (total, drago) => total + drago.rent.stats.unclaimedProfit,
-            0
-          ),
-        totalProfitOfNormalDragos: renteeInfo.dragos
-          .filter((drago) => drago.filter?.parts?.legendary == 0)
-          .reduce(
-            (total, drago) => total + drago.rent.stats.unclaimedProfit,
-            0
-          ),
-      });
+export function renteeInfoStats(renteesInfo: RenteeInfo[]): RenteeInfoStats[] {
+  const renteeStatsMap = new Map<string, RenteeInfoStats>();
+
+  for (const rentee of renteesInfo) {
+    let renteeStats = renteeStatsMap.get(rentee.walletAddress);
+
+    if (!renteeStats) {
+      renteeStats = {
+        walletAddress: rentee.walletAddress,
+        count: 0,
+        dragos: [],
+        totalUnclaimedProfit: 0,
+        totalOfLegDragos: 0,
+        totalOfNormalDragos: 0,
+        totalProfitOfLegDragos: 0,
+        totalProfitOfNormalDragos: 0,
+      };
+      renteeStatsMap.set(rentee.walletAddress, renteeStats);
     }
-  });
-  return renteesInfoStats;
+
+    renteeStats.count = rentee.count;
+    renteeStats.dragos = rentee.dragos;
+
+    let totalUnclaimedProfit = 0;
+    let totalOfLegDragos = 0;
+    let totalOfNormalDragos = 0;
+    let totalProfitOfLegDragos = 0;
+    let totalProfitOfNormalDragos = 0;
+
+    rentee.dragos.forEach((drago) => {
+      const profit = drago.rent?.stats?.unclaimedProfit ?? 0;
+      const legendary = drago.filter?.parts?.legendary ?? 0;
+
+      totalUnclaimedProfit += profit;
+      if (legendary >= 1) {
+        totalOfLegDragos++;
+        totalProfitOfLegDragos += profit;
+      } else {
+        totalOfNormalDragos++;
+        totalProfitOfNormalDragos += profit;
+      }
+    });
+
+    renteeStats.totalUnclaimedProfit = totalUnclaimedProfit;
+    renteeStats.totalOfLegDragos = totalOfLegDragos;
+    renteeStats.totalOfNormalDragos = totalOfNormalDragos;
+    renteeStats.totalProfitOfLegDragos = totalProfitOfLegDragos;
+    renteeStats.totalProfitOfNormalDragos = totalProfitOfNormalDragos;
+  }
+
+  return Array.from(renteeStatsMap.values());
 }
 
 export const getRenteeInfo = (walletAddress: string, dragos: DragoInfo[]) => {

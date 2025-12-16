@@ -13,13 +13,17 @@ Dragos Dashboard is a web application that allows users to view their Dragos NFT
 - Next.js
 - TypeScript
 - Tailwind CSS
-- Shadcn UI
+- Zustand
 - SWR
 
 # Using
 
 Google Antigravity and its A.I. Features
 
-## Minor Issues
+## Future Plans
 
-- Double fetching of data
+- Rentee Analytics
+
+## Planned to fix
+
+- remove api folder/file if you using server components to render the data

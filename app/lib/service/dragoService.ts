@@ -6,10 +6,6 @@ export async function getDragosService(
   walletAddress: string,
   includeRent: boolean
 ) {
-  const localData = JSON.parse(localStorage.getItem("dragos") || "[]");
-  if (localData.length > 0) {
-    return localData;
-  }
   // Uses the default 10s timeout
   const data = await fetchWithTimeout(`/api/dragos`, {
     method: "POST",
@@ -17,7 +13,6 @@ export async function getDragosService(
     body: JSON.stringify({ address: walletAddress, includeRent }),
   });
 
-  localStorage.setItem("dragos", JSON.stringify(data));
   return data;
 }
 
@@ -26,10 +21,7 @@ export async function getDragosQuickCheck(
   includeRent: boolean
 ) {
   // Example with a custom 3-second timeout for fast checks
-  const localData = JSON.parse(localStorage.getItem("dragos") || "[]");
-  if (localData.length > 0) {
-    return localData;
-  }
+
   const data = await fetchWithTimeout(`/api/dragos`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -37,6 +29,5 @@ export async function getDragosQuickCheck(
     timeout: 3000,
   });
 
-  localStorage.setItem("dragos", JSON.stringify(data));
   return data;
 }
