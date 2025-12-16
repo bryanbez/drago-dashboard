@@ -29,7 +29,7 @@ const columns = [
   },
 ];
 
-export function DragosNearRentExpiry({ dragos }: { dragos: DragoInfo[] }) {
+export function DragosNearRentExpiryTable({ dragos }: { dragos: DragoInfo[] }) {
   "use no memo";
   // to avoid browser crash by re-rendering the table data
   const dragosOnNearExpiryDate: DragoInfo[] = useMemo(

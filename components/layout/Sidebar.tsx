@@ -35,8 +35,8 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex flex-col w-64 bg-slate-900 h-screen fixed left-0 top-0 text-white z-50">
       <div className="flex items-center justify-center h-20 border-b border-slate-700">
-        <h1 className="text-2xl font-bold tracking-wider text-indigo-400">
-          DRAGO
+        <h1 className="text-lg font-bold tracking-wider text-indigo-400">
+          DRAGO DST MONITOR
         </h1>
       </div>
       <nav className="flex-1 px-4 py-6 space-y-2">
@@ -50,7 +50,7 @@ const Sidebar = () => {
           </Link>
         ))}
       </nav>
-      <div className="p-4 border-t border-slate-700">
+      {/* <div className="p-4 border-t border-slate-700">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-sm font-bold">
             U
@@ -60,7 +60,7 @@ const Sidebar = () => {
             <p className="text-xs text-gray-400">View Profile</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

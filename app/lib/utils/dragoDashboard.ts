@@ -7,11 +7,11 @@ export const countDragosOwned = (dragos: DragoInfo[]): number => {
 };
 
 export const countRentedDragos = (dragos: DragoInfo[]): number => {
-  return dragos.filter((drago) => drago.rent.status === 1).length;
+  return dragos.filter((drago) => drago.rent?.status === 1).length;
 };
 
 export const countUnrentedDragos = (dragos: DragoInfo[]): number => {
-  return dragos.filter((drago) => drago.rent.status === 0).length;
+  return dragos.filter((drago) => drago.rent?.status === 0).length;
 };
 
 export const countUnclaimedDST = (dragos: DragoInfo[]): number => {
@@ -35,14 +35,16 @@ export const getDragosOnNearExpiryDate = (dragos: DragoInfo[]): DragoInfo[] => {
     new Date(expiryDate).getDate() + 29
   );
   const dragosOnNearExpiryDate = dragos
-    .filter((drago) => drago.rent.status === 1)
+    .filter((drago) => drago.rent?.status === 1)
     .filter(
-      (drago) => new Date(drago.rent.expireDate) < new Date(nearExpiryDate)
+      (drago) =>
+        drago.rent?.expireDate &&
+        new Date(drago.rent.expireDate) < new Date(nearExpiryDate)
     )
     .sort(
       (a, b) =>
-        new Date(a.rent.expireDate).getTime() -
-        new Date(b.rent.expireDate).getTime()
+        (a.rent?.expireDate ? new Date(a.rent.expireDate).getTime() : 0) -
+        (b.rent?.expireDate ? new Date(b.rent.expireDate).getTime() : 0)
     );
 
   return dragosOnNearExpiryDate;

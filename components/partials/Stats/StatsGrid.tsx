@@ -1,9 +1,9 @@
-import { getDSTLatestPrice } from "@/app/lib/utils/dstPrice";
+import { useFetchDSTPrice } from "@/app/hooks/useFetchDSTPrice";
 import { formatDST } from "@/app/lib/utils/renteeInfo";
 import { StatsGridProps } from "@/app/types/components";
 
 export const StatsGrid = ({ count, totalUnclaimedProfit }: StatsGridProps) => {
-  const dstPrice = getDSTLatestPrice();
+  const { dstPrice } = useFetchDSTPrice();
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center md:text-left">
       <div className="bg-gray-50 p-4 rounded-xl">
@@ -25,7 +25,7 @@ export const StatsGrid = ({ count, totalUnclaimedProfit }: StatsGridProps) => {
           Unclaimed USD
         </p>
         <p className="text-3xl font-bold text-green-700">
-          ${formatDST(totalUnclaimedProfit * Number(dstPrice))}
+          ${formatDST(totalUnclaimedProfit * Number(dstPrice || 0))}
         </p>
       </div>
     </div>

@@ -1,8 +1,8 @@
 "use client";
-import { storeLocalAndSync } from "../lib/service/storeLocalAndSync";
+import { storeLocalAndSyncDSTPrice } from "../lib/service/storeLocalAndSync";
 import useSWR from "swr";
 
-const fetcher = () => storeLocalAndSync().then((res) => res.dstPrice);
+const fetcher = () => storeLocalAndSyncDSTPrice();
 
 export const useFetchDSTPrice = () => {
   const { data, error, isLoading, mutate } = useSWR("dstPrice", fetcher, {

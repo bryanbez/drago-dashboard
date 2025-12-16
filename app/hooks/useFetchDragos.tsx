@@ -1,9 +1,9 @@
 "use client";
-import { storeLocalAndSync } from "../lib/service/storeLocalAndSync";
+import { storeLocalAndSyncDragos } from "../lib/service/storeLocalAndSync";
 import { DragoInfo } from "../types/drago";
 import useSWR from "swr";
 
-const fetcher = () => storeLocalAndSync().then((res) => res.dragos);
+const fetcher = () => storeLocalAndSyncDragos();
 
 export const useFetchDragos = () => {
   const { data, error, isLoading, mutate } = useSWR("dragos", fetcher, {
