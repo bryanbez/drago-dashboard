@@ -23,7 +23,12 @@ Google Antigravity and its A.I. Features
 ## Future Plans
 
 - Rentee Analytics
+- Drago Pictures
 
 ## Planned to fix
 
 - remove api folder/file if you using server components to render the data
+
+## For Drago Wallet Addresses
+
+- https://explorer.arena-z.gg/token/0xEec2Bc1aFc053E6e93c7811B5511AD9e28994e66
