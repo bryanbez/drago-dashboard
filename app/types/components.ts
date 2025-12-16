@@ -12,6 +12,9 @@ export interface TextboxType {
   placeholder: string;
   value?: string;
   type: string;
+  name?: string;
+  inputMode?: "numeric" | "text";
+  pattern?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 }

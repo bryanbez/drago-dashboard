@@ -7,11 +7,12 @@ import { validateTextboxInput } from "@/app/lib/utils/textboxValidator";
 function WalletAddressFormInput() {
   const walletAddress = useWalletStore((state) => state.walletAddress);
   const { fetchDragos, status, message } = useFetchDragos();
-
+  const setWalletAddress = useWalletStore((state) => state.setWalletAddress);
   const validateInput = validateTextboxInput(walletAddress);
 
   const handleFormInput = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setWalletAddress(walletAddress);
     fetchDragos();
   };
 
@@ -23,6 +24,8 @@ function WalletAddressFormInput() {
             type="text"
             placeholder="Input wallet address..."
             value={walletAddress}
+            name="walletAddress"
+            onChange={(e) => setWalletAddress(e.target.value)}
           />
 
           <button

@@ -11,3 +11,12 @@ export const validateTextboxInput = (input: string) => {
 
   return schema.safeParse(input);
 };
+
+// export const validateDragoIdSearchInput = (input: number) => {
+//   const schema = z
+//     .number()
+//     .min(1, "Enter a valid drago id")
+//     .max(5, "Enter a valid drago id");
+
+//   return schema.safeParse(input);
+// };

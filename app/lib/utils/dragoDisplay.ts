@@ -38,3 +38,9 @@ export const isUnrented = (drago: DragoInfo) => {
 export const isRented = (drago: DragoInfo) => {
   return drago.rent?.status === 1;
 };
+
+export const searchDragos = (dragos: DragoInfo[], searchDrago: string) => {
+  return dragos.filter((drago) =>
+    drago.tokenId.toString().includes(searchDrago)
+  );
+};
