@@ -22,8 +22,6 @@ export async function POST(request: Request) {
         address,
         includeRent,
       }),
-
-      //0xE86Cd3C133cC32D75d793FA8834A2BaC14d4aD3b
     });
 
     if (!response.ok) {
